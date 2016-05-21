@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Aliyun-oss-storage by jacobcyl</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Aliyun-oss-storage</h1>
+      <h2 class="project-tagline">阿里云OSS laravel storage Filesystem adapter, 打造Laravel最好的OSS Storage扩展.</h2>
+      <a href="https://github.com/jacobcyl/Aliyun-oss-storage" class="btn">View on GitHub</a>
+      <a href="https://github.com/jacobcyl/Aliyun-oss-storage/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/jacobcyl/Aliyun-oss-storage/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="aliyun-oss-storage-for-laravel-5" class="anchor" href="#aliyun-oss-storage-for-laravel-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Aliyun-oss-storage for Laravel 5+</h1>
+
+<p>Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.<br>
+借鉴了一些优秀的代码，综合各方，同时做了更多优化，将会添加更多完善的接口和插件，打造Laravel最好的OSS Storage扩展</p>
+
+<h2>
+<a id="inspired-by" class="anchor" href="#inspired-by" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Inspired By</h2>
+
+<ul>
+<li><a href="https://github.com/thephpleague/flysystem-aws-s3-v2">thephpleague/flysystem-aws-s3-v2</a></li>
+<li>
+<a href="https://github.com/apollopy/flysystem-aliyun-oss">apollopy/flysystem-aliyun-oss</a> </li>
+</ul>
+
+<h2>
+<a id="require" class="anchor" href="#require" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Require</h2>
+
+<ul>
+<li>Laravel 5+</li>
+<li>cURL extension</li>
+</ul>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>In order to install AliOSS-storage, just add</p>
+
+<pre><code>"jacobcyl/ali-oss-storage": "dev-master"
+</code></pre>
+
+<p>to your composer.json. Then run <code>composer install</code> or <code>composer update</code>.<br>
+Or, you can simple run below command</p>
+
+<pre><code>"composer require jacobcyl/ali-oss-storage"
+</code></pre>
+
+<p>to install.
+Then in your <code>config/app.php</code> add</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-c1">Jacobcyl\AliOSS\</span><span class="pl-c1">AliOssServiceProvider</span><span class="pl-k">::</span><span class="pl-c1">class</span>,</span></pre></div>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>add the following in app/filesystems.php:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>disks<span class="pl-pds">'</span></span><span class="pl-k">=&gt;</span>[</span>
+<span class="pl-s1">        <span class="pl-k">...</span></span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>oss<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>driver<span class="pl-pds">'</span></span>        <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>oss<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>access_id<span class="pl-pds">'</span></span>     <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;Your Aliyun OSS AccessKeyId&gt;<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>access_key<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;Your Aliyun OSS AccessKeySecret&gt;<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>bucket<span class="pl-pds">'</span></span>        <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;OSS bucket name&gt;<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>endpoint<span class="pl-pds">'</span></span>      <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>&lt;the endpoint of OSS, E.g: oss-cn-hangzhou.aliyuncs.com&gt; OR your custom domain, E.g:img.abc.com<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">                <span class="pl-s"><span class="pl-pds">'</span>isCName<span class="pl-pds">'</span></span>       <span class="pl-k">=&gt;</span> <span class="pl-k">&lt;</span><span class="pl-c1">true</span> <span class="pl-k">if</span> <span class="pl-k">use</span> <span class="pl-c1">custom domain as endpoint or false&gt;</span></span>
+<span class="pl-s1">        ],</span>
+<span class="pl-s1">        ...</span>
+<span class="pl-s1">    ]</span></pre></div>
+
+<p>then set the default driver in app/filesystems.php:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>default<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>oss<span class="pl-pds">'</span></span>,</span></pre></div>
+
+<p>Ok, you are finish to configure. Just feel free to use Aliyun OSS like Storage!</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>See <a href="https://laravel.com/docs/5.2/filesystem#custom-filesystems">Larave doc for Storage</a>
+Or you can learn here:</p>
+
+<blockquote>
+<p>First you must use Storage facade</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-k">use</span> <span class="pl-c1">Storage</span>;</span></pre></div>
+
+<p>Then You can use all APIs of laravel Storage</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>disk(<span class="pl-s"><span class="pl-pds">'</span>oss<span class="pl-pds">'</span></span>); <span class="pl-c">// if default filesystems driver is oss, you can skip this step</span></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c">//fetch all files of specified bucket(see upond configuration)</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>files(<span class="pl-smi">$directory</span>);</span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>allFiles(<span class="pl-smi">$directory</span>);</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>put(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>, <span class="pl-smi">$contents</span>); <span class="pl-c">//first parameter is the target file path, second paramter is file content</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>putFile(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>local/path/to/local_file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// upload file from local path</span></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>get(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// get the file object by path</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>exists(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// determine if a given file exists on the storage(OSS)</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>size(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// get the file size (Byte)</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>lastModified(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// get date of last modification</span></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>directories(<span class="pl-smi">$directory</span>); <span class="pl-c">// Get all of the directories within a given directory</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>allDirectories(<span class="pl-smi">$directory</span>); <span class="pl-c">// Get all (recursive) of the directories within a given directory</span></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>copy(<span class="pl-s"><span class="pl-pds">'</span>old/file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>new/file1.jpg<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>move(<span class="pl-s"><span class="pl-pds">'</span>old/file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>new/file1.jpg<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>rename(<span class="pl-s"><span class="pl-pds">'</span>path/to/file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>path/to/file2.jpg<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>prepend(<span class="pl-s"><span class="pl-pds">'</span>file.log<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>Prepended Text<span class="pl-pds">'</span></span>); <span class="pl-c">// Prepend to a file.</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>append(<span class="pl-s"><span class="pl-pds">'</span>file.log<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>Appended Text<span class="pl-pds">'</span></span>); <span class="pl-c">// Append to a file.</span></span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>delete(<span class="pl-s"><span class="pl-pds">'</span>file.jpg<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>delete([<span class="pl-s"><span class="pl-pds">'</span>file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>file2.jpg<span class="pl-pds">'</span></span>]);</span>
+<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>makeDirectory(<span class="pl-smi">$directory</span>); <span class="pl-c">// Create a directory.</span></span>
+<span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>deleteDirectory(<span class="pl-smi">$directory</span>); <span class="pl-c">// Recursively delete a directory.It will delete all files within a given directory, SO Use with caution please.</span></span></pre></div>
+</blockquote>
+
+<h2>
+<a id="documention" class="anchor" href="#documention" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documention</h2>
+
+<p>More development detail see <a href="https://help.aliyun.com/document_detail/32099.html?spm=5176.doc31981.6.335.eqQ9dM">Aliyun OSS DOC</a></p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Source code is release under MIT license. Read LICENSE file for more information.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/jacobcyl/Aliyun-oss-storage">Aliyun-oss-storage</a> is maintained by <a href="https://github.com/jacobcyl">jacobcyl</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
