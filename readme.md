@@ -3,7 +3,7 @@ Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just
 
 ##Inspired By
 - [thephpleague/flysystem-aws-s3-v2](https://github.com/thephpleague/flysystem-aws-s3-v2)
-- apollopy/flysystem-aliyun-oss 
+- [apollopy/flysystem-aliyun-oss](https://github.com/apollopy/flysystem-aliyun-oss) 
 
 ##Require
 - Laravel 5+
@@ -93,5 +93,8 @@ Or you can learn here:
     Storage::makeDirectory($directory); // Create a directory.
     Storage::deleteDirectory($directory); // Recursively delete a directory.It will delete all files within a given directory, SO Use with caution please.
 ```
+
+##Documention
+More develop detail see [Aliyun OSS DOC](https://help.aliyun.com/document_detail/32099.html?spm=5176.doc31981.6.335.eqQ9dM)
 ##License
 Source code is release under MIT license. Read LICENSE file for more information.
