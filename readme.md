@@ -63,7 +63,6 @@ Or you can learn here:
     Storage::allFiles($directory);
     ...
     Storage::put('path/to/file/file.jpg', $contents); //first parameter is the target file path, second paramter is file content
-    Storage::put('path/to/file/file.jpg', $contents); //first parameter is the target file path, second paramter is file content
     Storage::putFile('path/to/file/file.jpg', 'local/path/to/local_file.jpg'); // upload file from local path
     ...
     Storage::get('path/to/file/file.jpg'); // get the file object by path
