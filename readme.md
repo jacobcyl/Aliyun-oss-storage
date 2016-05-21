@@ -54,16 +54,10 @@ Or you can learn here:
 ```php
     use Storage;
 ```    
-> Then you can use these API:
-```php
-    Storage::allFiles(); // List all file of bucket
-```
-> You can use all API of laravel Storage
+> Then You can use all API of laravel Storage
 ```php
     Storage::disk('oss'); // if default filesystems driver is oss, you can skip this step
-    if($a){
-        asdfasdf;
-    }
+    ...
     //fetch all files of specified bucket(see upond configuration)
     Storage::files($directory);
     Storage::allFiles($directory);
