@@ -1,6 +1,6 @@
 #AliOSS-storage
-Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.
-
+Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.    
+借鉴了一些优秀的代码，同时做了更多优化，将会添加更多完善的接口和插件
 ##Inspired By
 - [thephpleague/flysystem-aws-s3-v2](https://github.com/thephpleague/flysystem-aws-s3-v2)
 - [apollopy/flysystem-aliyun-oss](https://github.com/apollopy/flysystem-aliyun-oss) 
@@ -54,7 +54,7 @@ Or you can learn here:
 ```php
     use Storage;
 ```    
-> Then You can use all API of laravel Storage
+> Then You can use all APIs of laravel Storage
 ```php
     Storage::disk('oss'); // if default filesystems driver is oss, you can skip this step
     ...
