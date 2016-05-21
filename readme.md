@@ -95,6 +95,6 @@ Or you can learn here:
 ```
 
 ##Documention
-More develop detail see [Aliyun OSS DOC](https://help.aliyun.com/document_detail/32099.html?spm=5176.doc31981.6.335.eqQ9dM)
+More development detail see [Aliyun OSS DOC](https://help.aliyun.com/document_detail/32099.html?spm=5176.doc31981.6.335.eqQ9dM)
 ##License
 Source code is release under MIT license. Read LICENSE file for more information.
