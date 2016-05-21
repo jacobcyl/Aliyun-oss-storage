@@ -77,8 +77,8 @@ Or you can learn here:
     Storage::size('path/to/file/file.jpg'); // get the file size (Byte)
     Storage::lastModified('path/to/file/file.jpg'); // get date of last modification
     ...
-    $directories = Storage::directories($directory); // Get all of the directories within a given directory
-    $directories = Storage::allDirectories($directory); // Get all (recursive) of the directories within a given directory
+    Storage::directories($directory); // Get all of the directories within a given directory
+    Storage::allDirectories($directory); // Get all (recursive) of the directories within a given directory
     ...
     Storage::copy('old/file1.jpg', 'new/file1.jpg');
     Storage::move('old/file1.jpg', 'new/file1.jpg');
