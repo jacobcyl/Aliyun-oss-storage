@@ -1,6 +1,9 @@
 {
     "name": "jacobcyl/ali-oss-storage",
-    "description": "aliyun oss for laravel 5",
+    "description": "aliyun oss filesystem storage for laravel 5+",
+    "keywords": ["aliyun", "oss", "laravel", "filesystems", "storage"],
+    "homepage": "https://github.com/jacobcyl",
+    "license": "MIT",
     "authors": [
         {
             "name": "jacobcyl",
