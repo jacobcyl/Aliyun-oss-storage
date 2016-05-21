@@ -93,41 +93,43 @@ Or you can learn here:</p>
 
 <blockquote>
 <p>First you must use Storage facade</p>
+</blockquote>
 
 <div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-k">use</span> <span class="pl-c1">Storage</span>;</span></pre></div>
 
+<blockquote>
 <p>Then You can use all APIs of laravel Storage</p>
+</blockquote>
 
 <div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>disk(<span class="pl-s"><span class="pl-pds">'</span>oss<span class="pl-pds">'</span></span>); <span class="pl-c">// if default filesystems driver is oss, you can skip this step</span></span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c">//fetch all files of specified bucket(see upond configuration)</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>files(<span class="pl-smi">$directory</span>);</span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>allFiles(<span class="pl-smi">$directory</span>);</span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>put(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>, <span class="pl-smi">$contents</span>); <span class="pl-c">//first parameter is the target file path, second paramter is file content</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>putFile(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>local/path/to/local_file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// upload file from local path</span></span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>get(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// get the file object by path</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>exists(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// determine if a given file exists on the storage(OSS)</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>size(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// get the file size (Byte)</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>lastModified(<span class="pl-s"><span class="pl-pds">'</span>path/to/file/file.jpg<span class="pl-pds">'</span></span>); <span class="pl-c">// get date of last modification</span></span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>directories(<span class="pl-smi">$directory</span>); <span class="pl-c">// Get all of the directories within a given directory</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>allDirectories(<span class="pl-smi">$directory</span>); <span class="pl-c">// Get all (recursive) of the directories within a given directory</span></span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>copy(<span class="pl-s"><span class="pl-pds">'</span>old/file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>new/file1.jpg<span class="pl-pds">'</span></span>);</span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>move(<span class="pl-s"><span class="pl-pds">'</span>old/file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>new/file1.jpg<span class="pl-pds">'</span></span>);</span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>rename(<span class="pl-s"><span class="pl-pds">'</span>path/to/file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>path/to/file2.jpg<span class="pl-pds">'</span></span>);</span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>prepend(<span class="pl-s"><span class="pl-pds">'</span>file.log<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>Prepended Text<span class="pl-pds">'</span></span>); <span class="pl-c">// Prepend to a file.</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>append(<span class="pl-s"><span class="pl-pds">'</span>file.log<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>Appended Text<span class="pl-pds">'</span></span>); <span class="pl-c">// Append to a file.</span></span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>delete(<span class="pl-s"><span class="pl-pds">'</span>file.jpg<span class="pl-pds">'</span></span>);</span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>delete([<span class="pl-s"><span class="pl-pds">'</span>file1.jpg<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>file2.jpg<span class="pl-pds">'</span></span>]);</span>
-<span class="pl-s1">    <span class="pl-k">...</span></span>
+<span class="pl-s1"></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>makeDirectory(<span class="pl-smi">$directory</span>); <span class="pl-c">// Create a directory.</span></span>
 <span class="pl-s1">    <span class="pl-c1">Storage</span><span class="pl-k">::</span>deleteDirectory(<span class="pl-smi">$directory</span>); <span class="pl-c">// Recursively delete a directory.It will delete all files within a given directory, SO Use with caution please.</span></span></pre></div>
-</blockquote>
 
 <h2>
 <a id="documention" class="anchor" href="#documention" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documention</h2>
