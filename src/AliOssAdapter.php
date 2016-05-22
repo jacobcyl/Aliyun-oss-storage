@@ -20,6 +20,10 @@ use Debugbar;
 class AliOssAdapter extends AbstractAdapter
 {
     /**
+     * @var Log debug Mode true|false
+     */
+    protected $debug;
+    /**
      * @var array
      */
     protected static $resultMap = [
@@ -77,10 +81,12 @@ class AliOssAdapter extends AbstractAdapter
     public function __construct(
         OssClient $client,
         $bucket,
+        $debug = false,
         $prefix = null,
         array $options = []
     )
     {
+        $this->debug = $debug;
         $this->client = $client;
         $this->bucket = $bucket;$this->setPathPrefix($prefix);
         $this->options = array_merge($this->options, $options);
@@ -505,8 +511,7 @@ class AliOssAdapter extends AbstractAdapter
         try {
             $acl = $this->client->getObjectAcl($this->bucket, $object);
         } catch (OssException $e) {
-            Log::error(__FUNCTION__ . ": FAILED");
-            Log::error($e->getMessage());
+            $this->logErr(__FUNCTION__, $e);
             return false;
         }
         
@@ -556,7 +561,7 @@ class AliOssAdapter extends AbstractAdapter
 
             return $result;
         }
-        Log::debug($result);
+        
         $result = array_merge($result, Util::map($object, static::$resultMap), ['type' => 'file']);
 
         return $result;
@@ -620,7 +625,9 @@ class AliOssAdapter extends AbstractAdapter
      * @param $e
      */
     protected function logErr($fun, $e){
-        Log::error($fun . ": FAILED");
-        Log::error($e->getMessage());
+        if( $this->debug ){
+            Log::error($fun . ": FAILED");
+            Log::error($e->getMessage());
+        }
     }
 }
