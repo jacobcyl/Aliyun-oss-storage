@@ -17,6 +17,5 @@
         "psr-4": {
             "Jacobcyl\\AliOSS\\": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
