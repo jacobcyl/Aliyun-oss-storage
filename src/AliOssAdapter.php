@@ -302,57 +302,67 @@ class AliOssAdapter extends AbstractAdapter
         $nextMarker = '';
         $maxkeys = 1000;
 
-        $options = array(
-            'delimiter' => $delimiter,
-            'prefix'    => $dirname,
-            'max-keys'  => $maxkeys,
-            'marker'    => $nextMarker,
-        );
-
-        try {
-            $listObjectInfo = $this->client->listObjects($this->bucket, $options);
-        } catch (OssException $e) {
-            $this->logErr(__FUNCTION__, $e);
-            return false;
-        }
-
-        $objectList = $listObjectInfo->getObjectList(); // 文件列表
-        $prefixList = $listObjectInfo->getPrefixList(); // 目录列表
+        //存储结果
+        $result = [];
         
-        if (!empty($objectList)) {
-            foreach ($objectList as $objectInfo) {
-
-                $object['Prefix']       = $dirname;
-                $object['Key']          = $objectInfo->getKey();
-                $object['LastModified'] = $objectInfo->getLastModified();
-                $object['eTag']         = $objectInfo->getETag();
-                $object['Type']         = $objectInfo->getType();
-                $object['Size']         = $objectInfo->getSize();
-                $object['StorageClass'] = $objectInfo->getStorageClass();
-
-                $result['objects'][] = $object;
+        while(true){
+            $options = [
+                'delimiter' => $delimiter,
+                'prefix'    => $dirname,
+                'max-keys'  => $maxkeys,
+                'marker'    => $nextMarker,
+            ];
+    
+            try {
+                $listObjectInfo = $this->client->listObjects($this->bucket, $options);
+            } catch (OssException $e) {
+                $this->logErr(__FUNCTION__, $e);
+                return false;
             }
-        }else{
-            $result["objects"] = [];
-        }
-
-        if (!empty($prefixList)) {
-            foreach ($prefixList as $prefixInfo) {
-                $result['prefix'][] = $prefixInfo->getPrefix();
+            
+            $nextMarker = $listObjectInfo->getNextMarker(); // 得到nextMarker，从上一次listObjects读到的最后一个文件的下一个文件开始继续获取文件列表
+            $objectList = $listObjectInfo->getObjectList(); // 文件列表
+            $prefixList = $listObjectInfo->getPrefixList(); // 目录列表
+            
+            if (!empty($objectList)) {
+                foreach ($objectList as $objectInfo) {
+    
+                    $object['Prefix']       = $dirname;
+                    $object['Key']          = $objectInfo->getKey();
+                    $object['LastModified'] = $objectInfo->getLastModified();
+                    $object['eTag']         = $objectInfo->getETag();
+                    $object['Type']         = $objectInfo->getType();
+                    $object['Size']         = $objectInfo->getSize();
+                    $object['StorageClass'] = $objectInfo->getStorageClass();
+    
+                    $result['objects'][] = $object;
+                }
+            }else{
+                $result["objects"] = [];
             }
-        }else{
-            $result['prefix'] = [];
-        }
-
-        if($recursive){
-
-            foreach( $result['prefix'] as $pfix){
-                $next  =  $this->listDirObjects($pfix , $recursive);
-                $result["objects"] = array_merge($result['objects'], $next["objects"]);
+    
+            if (!empty($prefixList)) {
+                foreach ($prefixList as $prefixInfo) {
+                    $result['prefix'][] = $prefixInfo->getPrefix();
+                }
+            }else{
+                $result['prefix'] = [];
             }
-
+    
+            //递归查询子目录所有文件
+            if($recursive){
+                foreach( $result['prefix'] as $pfix){
+                    $next  =  $this->listDirObjects($pfix , $recursive);
+                    $result["objects"] = array_merge($result['objects'], $next["objects"]);
+                }
+            }
+            
+            //没有更多结果了
+            if ($nextMarker === '') {
+                break;
+            }
         }
-
+        
         return $result;
     }
 
