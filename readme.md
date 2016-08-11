@@ -17,7 +17,7 @@ In order to install AliOSS-storage, just add
 to your composer.json. Then run `composer install` or `composer update`.  
 Or, you can simple run below command
 
-    "composer require jacobcyl/ali-oss-storage:dev-master"
+    "composer require jacobcyl/ali-oss-storage:^1.1"
     
 to install.
 Then in your `config/app.php` add
