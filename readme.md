@@ -35,7 +35,8 @@ add the following in app/filesystems.php:
                 'access_key'    => '<Your Aliyun OSS AccessKeySecret>',
                 'bucket'        => '<OSS bucket name>',
                 'endpoint'      => '<the endpoint of OSS, E.g: oss-cn-hangzhou.aliyuncs.com> OR your custom domain, E.g:img.abc.com',
-                'isCName'       => <true if use custom domain as endpoint or false>
+                'isCName'       => <true if use custom domain as endpoint or false>,
+                'debug'         => 'true|false'
         ],
         ...
     ]
