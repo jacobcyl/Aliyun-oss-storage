@@ -36,7 +36,7 @@ add the following in app/filesystems.php:
                 'bucket'        => '<OSS bucket name>',
                 'endpoint'      => '<the endpoint of OSS, E.g: oss-cn-hangzhou.aliyuncs.com> OR your custom domain, E.g:img.abc.com',
                 'isCName'       => <true if use custom domain as endpoint or false>,
-                'debug'         => 'true|false'
+                'debug'         => <true|false>
         ],
         ...
     ]
