@@ -90,7 +90,7 @@ Storage::makeDirectory($directory); // Create a directory.
 Storage::deleteDirectory($directory); // Recursively delete a directory.It will delete all files within a given directory, SO Use with caution please.
 ```
 
-##Documention
+##Documentation
 More development detail see [Aliyun OSS DOC](https://help.aliyun.com/document_detail/32099.html?spm=5176.doc31981.6.335.eqQ9dM)
 ##License
 Source code is release under MIT license. Read LICENSE file for more information.
