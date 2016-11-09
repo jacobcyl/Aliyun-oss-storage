@@ -12,12 +12,12 @@ Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just
 ##Installation
 In order to install AliOSS-storage, just add
 
-    "jacobcyl/ali-oss-storage": "^1.1"
+    "jacobcyl/ali-oss-storage": "^2.0"
 
 to your composer.json. Then run `composer install` or `composer update`.  
 Or you can simply run below command：
 
-    "composer require jacobcyl/ali-oss-storage:^1.1"
+    "composer require jacobcyl/ali-oss-storage:^2.0"
     
 to install.
 Then in your `config/app.php` add
@@ -67,6 +67,8 @@ Storage::allFiles($directory);
 
 Storage::put('path/to/file/file.jpg', $contents); //first parameter is the target file path, second paramter is file content
 Storage::putFile('path/to/file/file.jpg', 'local/path/to/local_file.jpg'); // upload file from local path
+//new plugin for v2.0 version
+Storage::putRemoteFile('target/path/to/file/jacob.jpg', 'http://example.com/jacob.jpg'); //upload remote file to storage by remote url
 
 Storage::get('path/to/file/file.jpg'); // get the file object by path
 Storage::exists('path/to/file/file.jpg'); // determine if a given file exists on the storage(OSS)
