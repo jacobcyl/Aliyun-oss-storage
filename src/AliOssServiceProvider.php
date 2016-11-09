@@ -3,6 +3,7 @@
 namespace Jacobcyl\AliOSS;
 
 use Jacobcyl\AliOSS\Plugins\PutFile;
+use Jacobcyl\AliOSS\Plugins\PutRemoteFile;
 use Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -43,6 +44,7 @@ class AliOssServiceProvider extends ServiceProvider
             $filesystem =  new Filesystem($adapter);
             
             $filesystem->addPlugin(new PutFile());
+            $filesystem->addPlugin(new PutRemoteFile());
             //$filesystem->addPlugin(new CallBack());
             return $filesystem;
         });
