@@ -15,17 +15,16 @@ In order to install AliOSS-storage, just add
     "jacobcyl/ali-oss-storage": "^2.0"
 
 to your composer.json. Then run `composer install` or `composer update`.  
-Or you can simply run below command：
+Or you can simply run below command to install:
 
     "composer require jacobcyl/ali-oss-storage:^2.0"
     
-to install.
-Then in your `config/app.php` add
+Then in your `config/app.php` add this line to providers array:
 ```php
 Jacobcyl\AliOSS\AliOssServiceProvider::class,
 ```
 ##Configuration
-add the following in app/filesystems.php:
+Add the following in app/filesystems.php:
 ```php
     'disks'=>[
         ...
@@ -41,11 +40,11 @@ add the following in app/filesystems.php:
         ...
     ]
 ```
-then set the default driver in app/filesystems.php:
+Then set the default driver in app/filesystems.php:
 ```php
     'default' => 'oss',
 ```
-Ok, you are finish to configure. Just feel free to use Aliyun OSS like Storage!
+Ok, well! You are finish to configure. Just feel free to use Aliyun OSS like Storage!
 
 ##Usage
 See [Larave doc for Storage](https://laravel.com/docs/5.2/filesystem#custom-filesystems)
@@ -67,6 +66,7 @@ Storage::allFiles($directory);
 
 Storage::put('path/to/file/file.jpg', $contents); //first parameter is the target file path, second paramter is file content
 Storage::putFile('path/to/file/file.jpg', 'local/path/to/local_file.jpg'); // upload file from local path
+
 //new plugin for v2.0 version
 Storage::putRemoteFile('target/path/to/file/jacob.jpg', 'http://example.com/jacob.jpg'); //upload remote file to storage by remote url
 
