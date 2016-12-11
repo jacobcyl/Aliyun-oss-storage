@@ -1,5 +1,5 @@
 #Aliyun-oss-storage for Lumen 5+
-修改[jacobcyl/Aliyun-oss-storage](https://github.com/jacobcyl/Aliyun-oss-storage)的部分代码以便在lumen中运行.
+修改[jacobcyl/Aliyun-oss-storage](https://github.com/jacobcyl/Aliyun-oss-storage)的部分代码使其支持在Lumen中运行.
 
 ##Installation
 
