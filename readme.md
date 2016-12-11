@@ -3,7 +3,7 @@
 
 ##Installation
 
-    "composer require jacobcyl/ali-oss-storage:^2.0"
+    "composer require robincode/ali-oss-storage"
     
 Now, create `config/filesystems.php`, or copy from Laravel 5+.
 ```php
