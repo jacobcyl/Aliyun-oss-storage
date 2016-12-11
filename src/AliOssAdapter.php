@@ -14,7 +14,6 @@ use League\Flysystem\Config;
 use League\Flysystem\Util;
 use OSS\Core\OssException;
 use OSS\OssClient;
-use Log;
 use Debugbar;
 
 class AliOssAdapter extends AbstractAdapter
@@ -636,8 +635,8 @@ class AliOssAdapter extends AbstractAdapter
      */
     protected function logErr($fun, $e){
         if( $this->debug ){
-            Log::error($fun . ": FAILED");
-            Log::error($e->getMessage());
+            app('log')->error($fun . ": FAILED");
+            app('log')->error($e->getMessage());
         }
     }
 }

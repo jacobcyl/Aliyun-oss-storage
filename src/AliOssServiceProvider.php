@@ -4,8 +4,6 @@ namespace Jacobcyl\AliOSS;
 
 use Jacobcyl\AliOSS\Plugins\PutFile;
 use Jacobcyl\AliOSS\Plugins\PutRemoteFile;
-use Storage;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 use League\Flysystem\Filesystem;
 use OSS\OssClient;
@@ -29,7 +27,7 @@ class AliOssServiceProvider extends ServiceProvider
         }
         */
 
-        Storage::extend('oss', function($app, $config)
+        app('filesystem')->extend('oss', function($app, $config)
         {
             $accessId  = $config['access_id'];
             $accessKey = $config['access_key'];
@@ -40,7 +38,7 @@ class AliOssServiceProvider extends ServiceProvider
 
             $client  = new OssClient($accessId, $accessKey, $endPoint, $isCname);
             $adapter = new AliOssAdapter($client, $bucket, $debug);
-            //Log::debug($client);
+            //app('log')->debug($client);
             $filesystem =  new Filesystem($adapter);
             
             $filesystem->addPlugin(new PutFile());
