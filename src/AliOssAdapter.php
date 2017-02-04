@@ -508,7 +508,7 @@ class AliOssAdapter extends AbstractAdapter
     public function getTimestamp($path)
     {
         if( $object = $this->getMetadata($path))
-            $object['timestamp'] = $object['last-modified'];
+            $object['timestamp'] = strtotime( $object['last-modified'] );
         return $object;
     }
 
