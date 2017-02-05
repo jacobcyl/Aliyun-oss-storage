@@ -66,21 +66,32 @@ class AliOssAdapter extends AbstractAdapter
     //bucket name
     protected $bucket;
 
+    protected $endPoint;
+
+    protected $ssl;
+
     //配置
     protected $options = [
         'Multipart'   => 128
     ];
 
+
     /**
      * AliOssAdapter constructor.
+     *
      * @param OssClient $client
-     * @param $bucket
-     * @param null $prefix
-     * @param array $options
+     * @param string    $bucket
+     * @param string    $endPoint
+     * @param bool      $ssl
+     * @param bool      $debug
+     * @param null      $prefix
+     * @param array     $options
      */
     public function __construct(
         OssClient $client,
         $bucket,
+        $endPoint,
+        $ssl,
         $debug = false,
         $prefix = null,
         array $options = []
@@ -88,7 +99,10 @@ class AliOssAdapter extends AbstractAdapter
     {
         $this->debug = $debug;
         $this->client = $client;
-        $this->bucket = $bucket;$this->setPathPrefix($prefix);
+        $this->bucket = $bucket;
+        $this->setPathPrefix($prefix);
+        $this->endPoint = $endPoint;
+        $this->ssl = $ssl;
         $this->options = array_merge($this->options, $options);
     }
 
@@ -532,6 +546,17 @@ class AliOssAdapter extends AbstractAdapter
         }
 
         return $res;
+    }
+
+
+    /**
+     * @param $path
+     *
+     * @return string
+     */
+    public function getUrl( $path )
+    {
+        return ( $this->ssl ? 'https://' : 'http://' ) . "{$this->bucket}.{$this->endPoint}/$path";
     }
 
     /**

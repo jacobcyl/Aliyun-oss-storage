@@ -39,7 +39,8 @@ class AliOssServiceProvider extends ServiceProvider
             $debug     = $config['debug'];
 
             $client  = new OssClient($accessId, $accessKey, $endPoint, $isCname);
-            $adapter = new AliOssAdapter($client, $bucket, $debug);
+            $adapter = new AliOssAdapter($client, $bucket, $endPoint, $app['request']->secure(), $debug);
+
             //Log::debug($client);
             $filesystem =  new Filesystem($adapter);
             
