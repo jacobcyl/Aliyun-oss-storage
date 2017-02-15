@@ -70,6 +70,8 @@ class AliOssAdapter extends AbstractAdapter
 
     protected $ssl;
 
+    protected $isCname;
+
     //配置
     protected $options = [
         'Multipart'   => 128
@@ -83,6 +85,7 @@ class AliOssAdapter extends AbstractAdapter
      * @param string    $bucket
      * @param string    $endPoint
      * @param bool      $ssl
+     * @param bool      $isCname
      * @param bool      $debug
      * @param null      $prefix
      * @param array     $options
@@ -92,6 +95,7 @@ class AliOssAdapter extends AbstractAdapter
         $bucket,
         $endPoint,
         $ssl,
+        $isCname = false,
         $debug = false,
         $prefix = null,
         array $options = []
@@ -103,6 +107,7 @@ class AliOssAdapter extends AbstractAdapter
         $this->setPathPrefix($prefix);
         $this->endPoint = $endPoint;
         $this->ssl = $ssl;
+        $this->isCname = $isCname;
         $this->options = array_merge($this->options, $options);
     }
 
@@ -556,7 +561,7 @@ class AliOssAdapter extends AbstractAdapter
      */
     public function getUrl( $path )
     {
-        return ( $this->ssl ? 'https://' : 'http://' ) . "{$this->bucket}.{$this->endPoint}/$path";
+        return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? '' : $this->bucket ) . "{$this->endPoint}/$path";
     }
 
     /**
