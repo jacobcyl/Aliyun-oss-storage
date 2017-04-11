@@ -543,7 +543,7 @@ class AliOssAdapter extends AbstractAdapter
             $this->logErr(__FUNCTION__, $e);
             return false;
         }
-        
+
         if ($acl == OssClient::OSS_ACL_TYPE_PUBLIC_READ ){
             $res['visibility'] = AdapterInterface::VISIBILITY_PUBLIC;
         }else{
@@ -553,15 +553,14 @@ class AliOssAdapter extends AbstractAdapter
         return $res;
     }
 
-
     /**
      * @param $path
      *
      * @return string
      */
-    public function getUrl( $path )
+    public function getUrl($path)
     {
-        return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? '' : $this->bucket ) . "{$this->endPoint}/$path";
+        return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? '' : ($this->bucket . '.') ) . "{$this->endPoint}/$path";
     }
 
     /**
@@ -601,7 +600,7 @@ class AliOssAdapter extends AbstractAdapter
 
             return $result;
         }
-        
+
         $result = array_merge($result, Util::map($object, static::$resultMap), ['type' => 'file']);
 
         return $result;
