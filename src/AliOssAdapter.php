@@ -67,6 +67,8 @@ class AliOssAdapter extends AbstractAdapter
     protected $bucket;
 
     protected $endPoint;
+    
+    protected $cdnDomain;
 
     protected $ssl;
 
@@ -97,6 +99,7 @@ class AliOssAdapter extends AbstractAdapter
         $ssl,
         $isCname = false,
         $debug = false,
+        $cdnDomain,
         $prefix = null,
         array $options = []
     )
@@ -108,6 +111,7 @@ class AliOssAdapter extends AbstractAdapter
         $this->endPoint = $endPoint;
         $this->ssl = $ssl;
         $this->isCname = $isCname;
+        $this->cdnDomain = $cdnDomain
         $this->options = array_merge($this->options, $options);
     }
 
@@ -561,7 +565,7 @@ class AliOssAdapter extends AbstractAdapter
      */
     public function getUrl( $path )
     {
-        return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? '' : $this->bucket.'.' ) . "{$this->endPoint}/$path";
+        return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endpoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
     }
 
     /**
