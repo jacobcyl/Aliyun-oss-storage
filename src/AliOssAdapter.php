@@ -111,7 +111,7 @@ class AliOssAdapter extends AbstractAdapter
         $this->endPoint = $endPoint;
         $this->ssl = $ssl;
         $this->isCname = $isCname;
-        $this->cdnDomain = $cdnDomain
+        $this->cdnDomain = $cdnDomain;
         $this->options = array_merge($this->options, $options);
     }
 
