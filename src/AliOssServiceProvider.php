@@ -40,6 +40,8 @@ class AliOssServiceProvider extends ServiceProvider
             $ssl       = empty($config['ssl']) ? false : $config['ssl']; 
             $isCname   = empty($config['isCName']) ? false : $config['isCName'];
             $debug     = empty($config['debug']) ? false : $config['debug'];
+            
+            if($debug) Log::debug('OSS config:', $config);
 
             $client  = new OssClient($accessId, $accessKey, $epInternal, $isCname);
             $adapter = new AliOssAdapter($client, $bucket, $endPoint, $ssl, $isCname, $debug, $cdnDomain);
