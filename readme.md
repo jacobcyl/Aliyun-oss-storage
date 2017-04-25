@@ -1,11 +1,11 @@
-#Aliyun-oss-storage for Laravel 5+
+# Aliyun-oss-storage for Laravel 5+
 Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.    
 借鉴了一些优秀的代码，综合各方，同时做了更多优化，将会添加更多完善的接口和插件，打造Laravel最好的OSS Storage扩展
 ##Inspired By
 - [thephpleague/flysystem-aws-s3-v2](https://github.com/thephpleague/flysystem-aws-s3-v2)
 - [apollopy/flysystem-aliyun-oss](https://github.com/apollopy/flysystem-aliyun-oss) 
 
-##Require
+## Require
 - Laravel 5+
 - cURL extension
 
@@ -23,7 +23,7 @@ Then in your `config/app.php` add this line to providers array:
 ```php
 Jacobcyl\AliOSS\AliOssServiceProvider::class,
 ```
-##Configuration
+## Configuration
 Add the following in app/filesystems.php:
 ```php
     'disks'=>[
@@ -48,7 +48,7 @@ Then set the default driver in app/filesystems.php:
 ```
 Ok, well! You are finish to configure. Just feel free to use Aliyun OSS like Storage!
 
-##Usage
+## Usage
 See [Larave doc for Storage](https://laravel.com/docs/5.2/filesystem#custom-filesystems)
 Or you can learn here:
 
@@ -97,7 +97,7 @@ Storage::putRemoteFile('target/path/to/file/jacob.jpg', 'http://example.com/jaco
 Storage::getUrl('path/to/img.jpg') // get the file url
 ```
 
-##Documentation
+## Documentation
 More development detail see [Aliyun OSS DOC](https://help.aliyun.com/document_detail/32099.html?spm=5176.doc31981.6.335.eqQ9dM)
-##License
+## License
 Source code is release under MIT license. Read LICENSE file for more information.
