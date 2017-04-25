@@ -15,7 +15,7 @@ use League\Flysystem\Util;
 use OSS\Core\OssException;
 use OSS\OssClient;
 use Log;
-use Debugbar;
+use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class AliOssAdapter extends AbstractAdapter
 {
@@ -318,6 +318,7 @@ class AliOssAdapter extends AbstractAdapter
      * @param string $dirname 目录
      * @param bool $recursive 是否递归
      * @return mixed
+     * @throws OssException
      */
     public function listDirObjects($dirname = '', $recursive =  false)
     {
@@ -340,7 +341,8 @@ class AliOssAdapter extends AbstractAdapter
                 $listObjectInfo = $this->client->listObjects($this->bucket, $options);
             } catch (OssException $e) {
                 $this->logErr(__FUNCTION__, $e);
-                return false;
+                // return false;
+                throw $e;
             }
 
             $nextMarker = $listObjectInfo->getNextMarker(); // 得到nextMarker，从上一次listObjects读到的最后一个文件的下一个文件开始继续获取文件列表
@@ -565,6 +567,7 @@ class AliOssAdapter extends AbstractAdapter
      */
     public function getUrl( $path )
     {
+        if (!$this->has($path)) throw new FileNotFoundException($filePath.' not found');
         return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endpoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
     }
 
