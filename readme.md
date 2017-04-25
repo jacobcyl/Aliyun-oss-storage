@@ -34,8 +34,9 @@ Add the following in app/filesystems.php:
                 'access_key'    => '<Your Aliyun OSS AccessKeySecret>',
                 'bucket'        => '<OSS bucket name>',
                 'endpoint'      => '<the endpoint of OSS, E.g: oss-cn-hangzhou.aliyuncs.com> OR your custom domain, E.g:img.abc.com',
-                'isCName'       => <true if use custom domain as endpoint or false>,
-                'debug'         => <true|false>
+                'cdnDomain'     => '<CDN domain, cdn域名>', // 如果isCName为true, getUrl会判断cdnDomain是否设定来决定返回的url，如果cdnDomain未设置，则使用endpoint来生成url，否则使用cdn
+                'isCName'       => <true if use custom domain as endpoint or false>, // 是否使用自定义域名
+                'debug'         => <true|false>
         ],
         ...
     ]
@@ -92,7 +93,7 @@ Storage::deleteDirectory($directory); // Recursively delete a directory.It will 
 // new plugin for v2.0 version
 Storage::putRemoteFile('target/path/to/file/jacob.jpg', 'http://example.com/jacob.jpg'); //upload remote file to storage by remote url
 // new function for v2.0.1 version
-Storage::getUrl('/path/to/img.jpg') // get the file url
+Storage::getUrl('path/to/img.jpg') // get the file url
 ```
 
 ##Documentation
