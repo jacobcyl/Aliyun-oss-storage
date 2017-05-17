@@ -146,6 +146,7 @@ class AliOssAdapter extends AbstractAdapter
      */
     public function write($path, $contents, Config $config)
     {
+		$contents = stream_get_contents($contents);
         $object = $this->applyPathPrefix($path);
         $options = $this->getOptions($this->options, $config);
 
