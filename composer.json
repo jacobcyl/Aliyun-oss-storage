@@ -1,5 +1,5 @@
 {
-    "name": "jacobcyl/ali-oss-storage",
+    "name": "mb.programmer/alibaba-oss-storage",
     "description": "aliyun oss filesystem storage for laravel 5+",
     "keywords": ["aliyun", "oss", "laravel", "filesystems", "storage"],
     "homepage": "http://jacobcyl.github.io/Aliyun-oss-storage/",
