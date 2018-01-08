@@ -17,5 +17,12 @@
         "psr-4": {
             "Jacobcyl\\AliOSS\\": "src/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Jacobcyl\\AliOSS\\AliOssServiceProvider"
+            ]
+        }
     }
 }
