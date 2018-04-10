@@ -567,8 +567,16 @@ class AliOssAdapter extends AbstractAdapter
      */
     public function getUrl( $path )
     {
-        if (!$this->has($path)) throw new FileNotFoundException($filePath.' not found');
-        return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endPoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
+		/* Should not check if it is exits.while file url is xxx//abc.jpg,it can show in the explore,but return an error by OSS API.
+           And I don't want to get an exception even though this file is not exists. if an exception occur, my page will not show, that is not my desired result.
+        */
+        if($this->isCname)
+        {
+            return $this->cdnDomain.'/'.ltrim($path);
+        }else
+        {
+            return ( $this->ssl ? 'https://' : 'http://' ).( $this->cdnDomain == '' ? $this->endPoint : $this->cdnDomain ). '/' . ltrim($path, '/');
+        }
     }
 
     /**
