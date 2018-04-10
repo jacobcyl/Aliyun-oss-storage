@@ -7,7 +7,6 @@
 
 namespace Jacobcyl\AliOSS;
 
-use Dingo\Api\Contract\Transformer\Adapter;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
@@ -15,7 +14,7 @@ use League\Flysystem\Util;
 use OSS\Core\OssException;
 use OSS\OssClient;
 use Log;
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use League\Flysystem\FileNotFoundException;
 
 class AliOssAdapter extends AbstractAdapter
 {
