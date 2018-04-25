@@ -1,5 +1,5 @@
 {
-    "name": "jacobcyl/ali-oss-storage",
+    "name": "jason-xt/aliyun-oss-storage-laravel",
     "description": "aliyun oss filesystem storage for laravel 5+",
     "keywords": ["aliyun", "oss", "laravel", "filesystems", "storage"],
     "homepage": "http://jacobcyl.github.io/Aliyun-oss-storage/",
@@ -8,6 +8,10 @@
         {
             "name": "jacobcyl",
             "email": "cyl.jacob@gmail.com"
+        },
+        {
+            "name": "jason-xu",
+            "email": "649223152@qq.com"
         }
     ],
     "require": {
