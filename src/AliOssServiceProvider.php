@@ -53,6 +53,8 @@ class AliOssServiceProvider extends ServiceProvider
             
             $filesystem->addPlugin(new PutFile());
             $filesystem->addPlugin(new PutRemoteFile());
+            // 增加使用签名URL进行临时授权
+            $filesystem->addPlugin(new SignUrl());
             //$filesystem->addPlugin(new CallBack());
             return $filesystem;
         });
