@@ -8,10 +8,8 @@
 
 namespace Jacobcyl\AliOSS\Plugins;
 
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
-use Illuminate\Support\Facades\Log;
-use League\Flysystem\Config;
 use League\Flysystem\Plugin\AbstractPlugin;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class SignUrl extends AbstractPlugin
 {
@@ -27,7 +25,7 @@ class SignUrl extends AbstractPlugin
     }
 
     public function handle($path, $timeout = 600){
-        if (!$this->filesystem->getAdapter()->has($path)) throw new FileNotFoundException($filePath.' not found');
+        if (!$this->filesystem->getAdapter()->has($path)) throw new FileNotFoundException($path.' not found');
         return $this->filesystem->getAdapter()->getClient()->signUrl($this->filesystem->getAdapter()->getBucket(),$path,$timeout);
     }
 }
