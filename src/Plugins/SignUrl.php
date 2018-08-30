@@ -6,7 +6,7 @@
  * Time: 下午7:03
  */
 
-namespace Jacobcyl\AliOSS\Plugins;
+namespace SummerGeorge\AliOSS\Plugins;
 
 use League\Flysystem\Plugin\AbstractPlugin;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;

@@ -1,10 +1,10 @@
 <?php
 
-namespace Jacobcyl\AliOSS;
+namespace SummerGeorge\AliOSS;
 
-use Jacobcyl\AliOSS\Plugins\PutFile;
-use Jacobcyl\AliOSS\Plugins\PutRemoteFile;
-use Jacobcyl\AliOSS\Plugins\SignUrl;
+use SummerGeorge\AliOSS\Plugins\PutFile;
+use SummerGeorge\AliOSS\Plugins\PutRemoteFile;
+use SummerGeorge\AliOSS\Plugins\SignUrl;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
