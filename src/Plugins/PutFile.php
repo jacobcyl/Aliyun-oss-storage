@@ -6,7 +6,7 @@
  * Time: 下午8:31
  */
 
-namespace SummerGeorge\AliOSS\Plugins;
+namespace Jacobcyl\AliOSS\Plugins;
 
 use League\Flysystem\Config;
 use League\Flysystem\Plugin\AbstractPlugin;

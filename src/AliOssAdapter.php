@@ -5,7 +5,7 @@
  * Time: 下午 17:07
  */
 
-namespace SummerGeorge\AliOSS;
+namespace Jacobcyl\AliOSS;
 
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\AdapterInterface;

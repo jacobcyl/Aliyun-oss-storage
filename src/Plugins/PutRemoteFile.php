@@ -5,7 +5,7 @@
  * Date: 16/5/20
  * Time: 下午8:31
  */
-namespace SummerGeorge\AliOSS\Plugins;
+namespace Jacobcyl\AliOSS\Plugins;
 use League\Flysystem\Config;
 use League\Flysystem\Plugin\AbstractPlugin;
 class PutRemoteFile extends AbstractPlugin
