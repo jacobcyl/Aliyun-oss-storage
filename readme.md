@@ -104,6 +104,7 @@ Storage::signUrl('path/to/img.jpg',$timeout) // get the file url with signature,
 
 // new function for v2.1.2 version
 // 阿里云 oss 帮助文档：https://help.aliyun.com/document_detail/44688.html?spm=a2c4g.11186623.6.1199.40572e934MoHWu
+// getProcessUrl(图片在 oss 中的路径,操作名称（例如：resize）,参数（key => value 形式的数组）);
 Storage::getProcessUrl('path/to/img.jpg','resize', ['m' => 'fixed','h' => '100','w' => '100']) // picture processing，处理图片，支持 oss 图片处理的功能
 ```
 
