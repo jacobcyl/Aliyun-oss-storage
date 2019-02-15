@@ -5,6 +5,7 @@ namespace Jacobcyl\AliOSS;
 use Jacobcyl\AliOSS\Plugins\PutFile;
 use Jacobcyl\AliOSS\Plugins\PutRemoteFile;
 use Jacobcyl\AliOSS\Plugins\SignUrl;
+use Jacobcyl\AliOSS\Plugins\GetProcessUrl;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
@@ -37,13 +38,13 @@ class AliOssServiceProvider extends ServiceProvider
 
             $cdnDomain = empty($config['cdnDomain']) ? '' : $config['cdnDomain'];
             $bucket    = $config['bucket'];
-            $ssl       = empty($config['ssl']) ? false : $config['ssl']; 
+            $ssl       = empty($config['ssl']) ? false : $config['ssl'];
             $isCname   = empty($config['isCName']) ? false : $config['isCName'];
             $debug     = empty($config['debug']) ? false : $config['debug'];
 
             $endPoint  = $config['endpoint']; // 默认作为外部节点
             $epInternal= $isCname?$cdnDomain:(empty($config['endpoint_internal']) ? $endPoint : $config['endpoint_internal']); // 内部节点
-            
+
             if($debug) Log::debug('OSS config:', $config);
 
             $client  = new OssClient($accessId, $accessKey, $epInternal, $isCname);
@@ -51,11 +52,14 @@ class AliOssServiceProvider extends ServiceProvider
 
             //Log::debug($client);
             $filesystem =  new Filesystem($adapter);
-            
+
             $filesystem->addPlugin(new PutFile());
             $filesystem->addPlugin(new PutRemoteFile());
-            // 增加使用签名URL进行临时授权
+            //增加使用签名URL进行临时授权
             $filesystem->addPlugin(new SignUrl());
+
+            //增加图片处理的方法
+            $filesystem->addPlugin(new GetProcessUrl());
             //$filesystem->addPlugin(new CallBack());
             return $filesystem;
         });
