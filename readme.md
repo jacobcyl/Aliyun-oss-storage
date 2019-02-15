@@ -10,7 +10,6 @@ Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just
 - Laravel 5+
 - cURL extension
 
-更新：2019-02-15
 之前 fork 的 [jacobcyl/Aliyun-oss-storage](https://github.com/jacobcyl/Aliyun-oss-storage) ，自2.1.1版本开始，增加新功能，更改 composer 包名称为：`summergeorge/ali-oss-storage`
 
 ## Installation 
