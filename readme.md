@@ -1,4 +1,16 @@
-# Aliyun-oss-storage for Laravel 5+
+<h1 align="center">
+ Aliyun-oss-storage for Laravel 5+
+</h1>
+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/badges/build.png?b=master)](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/build-status/master)
+[![Latest Stable Version](https://poser.pugx.org/summergeorge/ali-oss-storage/v/stable)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+[![Total Downloads](https://poser.pugx.org/summergeorge/ali-oss-storage/downloads)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+[![Latest Unstable Version](https://poser.pugx.org/summergeorge/ali-oss-storage/v/unstable)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+[![License](https://poser.pugx.org/summergeorge/ali-oss-storage/license)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+
+----
+
 Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.    
 借鉴了一些优秀的代码，综合各方，同时做了更多优化，将会添加更多完善的接口和插件，打造Laravel最好的OSS Storage扩展
 ## Inspired By
