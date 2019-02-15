@@ -21,7 +21,7 @@ class GetProcessUrl extends AbstractPlugin
      */
     public function getMethod()
     {
-        return 'signUrl';
+        return 'getProcessUrl';
     }
 
     /**
