@@ -34,10 +34,10 @@ class AliOssServiceProvider extends ServiceProvider
             $accessId  = $config['access_id'];
             $accessKey = $config['access_key'];
 
-            $cdnDomain = empty($config['cdnDomain']) ? '' : $config['cdnDomain'];
+            $cdnDomain = empty($config['cdn_domain']) ? '' : $config['cdn_domain'];
             $bucket    = $config['bucket'];
             $ssl       = empty($config['ssl']) ? false : $config['ssl']; 
-            $isCname   = empty($config['isCName']) ? false : $config['isCName'];
+            $isCname   = empty($config['is_c_name']) ? false : $config['is_c_name'];
             $debug     = empty($config['debug']) ? false : $config['debug'];
 
             $endPoint  = $config['endpoint']; // 默认作为外部节点
