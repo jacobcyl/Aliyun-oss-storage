@@ -573,6 +573,33 @@ class AliOssAdapter extends AbstractAdapter
         if (!$this->has($path)) throw new FileNotFoundException($path.' not found');
         return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endPoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
     }
+    
+    
+    /**
+     * @param $path
+     * @param $expire
+     * @param $options
+     * @return string
+     * @throws FileNotFoundException
+     * @throws OssException
+     */
+    public function getTemporaryUrl($path, $expire, $options) {
+        if (!$this->has($path))
+            throw new FileNotFoundException($path.' not found');
+        $method = OssClient::OSS_HTTP_GET;
+        if (Arr::has($options, OssClient::OSS_METHOD)) {
+            $method = $options['method'];
+        }
+        return $this->getClient()
+            ->signUrl(
+                $this->getBucket(),
+                $path,
+                now()->diffInSeconds($expire),
+                $method,
+                $options
+            );
+    }
+    
 
     /**
      * The the ACL visibility.
