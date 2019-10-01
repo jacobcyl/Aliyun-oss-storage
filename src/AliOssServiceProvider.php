@@ -40,7 +40,7 @@ class AliOssServiceProvider extends ServiceProvider
             $bucket    = $config['bucket'];
             $ssl       = empty($config['ssl']) ? false : $config['ssl'];
             $isCname   = empty($config['isCName']) ? false : $config['isCName'];
-            $securityToken = empty($config['securityToken']) ? '' : $config['securityToken'];
+            $securityToken = empty($config['securityToken']) ? null : $config['securityToken'];
             $debug     = empty($config['debug']) ? false : $config['debug'];
 
             $endPoint  = $config['endpoint']; // 默认作为外部节点
