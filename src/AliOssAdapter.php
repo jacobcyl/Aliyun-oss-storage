@@ -7,6 +7,7 @@
 
 namespace Jacobcyl\AliOSS;
 
+use Illuminate\Support\Arr;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
@@ -573,8 +574,8 @@ class AliOssAdapter extends AbstractAdapter
         if (!$this->has($path)) throw new FileNotFoundException($path.' not found');
         return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endPoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
     }
-    
-    
+
+
     /**
      * @param $path
      * @param $expire
@@ -583,7 +584,7 @@ class AliOssAdapter extends AbstractAdapter
      * @throws FileNotFoundException
      * @throws OssException
      */
-    public function getTemporaryUrl($path, $expire, $options) {
+    public function getTemporaryUrl($path, $expire = 600, $options) {
         if (!$this->has($path))
             throw new FileNotFoundException($path.' not found');
         $method = OssClient::OSS_HTTP_GET;
@@ -594,12 +595,12 @@ class AliOssAdapter extends AbstractAdapter
             ->signUrl(
                 $this->getBucket(),
                 $path,
-                now()->diffInSeconds($expire),
+                $expire,
                 $method,
                 $options
             );
     }
-    
+
 
     /**
      * The the ACL visibility.

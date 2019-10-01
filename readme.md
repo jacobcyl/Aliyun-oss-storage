@@ -10,6 +10,8 @@
 
 Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.    
 借鉴了一些优秀的代码，综合各方，同时做了更多优化，将会添加更多完善的接口和插件，打造Laravel最好的OSS Storage扩展
+
+#### 如果您对本项目对您有帮助且愿意花时间一起维护，欢迎通过Issues给我留言，我将把您添加为协作者。
 ## Inspired By
 - [thephpleague/flysystem-aws-s3-v2](https://github.com/thephpleague/flysystem-aws-s3-v2)
 - [apollopy/flysystem-aliyun-oss](https://github.com/apollopy/flysystem-aliyun-oss) 
@@ -109,7 +111,9 @@ Storage::putRemoteFile('target/path/to/file/jacob.jpg', 'http://example.com/jaco
 // new function for v2.0.1 version
 Storage::url('path/to/img.jpg') // get the file url
 // new function for v2.1.1 version
-Storage::signUrl('path/to/img.jpg',$timeout) // get the file url with signature,default timeout = 600
+Storage::signUrl('path/to/img.jpg',$timeout) //（请使用新的temporaryUrl方法） get the file url with signature,default timeout = 600
+// new function for v2.1.4 version
+Storage::temporaryUrl('path/to/img.jpg',$timeout) // get the file url with signature,default timeout = 600
 
 // new function for v2.1.2 version
 // 阿里云 oss 帮助文档：https://help.aliyun.com/document_detail/44688.html?spm=a2c4g.11186623.6.1199.40572e934MoHWu
