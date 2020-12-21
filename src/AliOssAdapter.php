@@ -660,7 +660,7 @@ class AliOssAdapter extends AbstractAdapter
             $options = array_merge($options, $this->getOptionsFromConfig($config));
         }
 
-        return array(OssClient::OSS_HEADERS => $options);
+        return $options;
     }
 
     /**
