@@ -7,14 +7,14 @@
 
 namespace Jacobcyl\AliOSS;
 
-use Dingo\Api\Contract\Transformer\Adapter;
+use Carbon\Carbon;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 use League\Flysystem\Util;
 use OSS\Core\OssException;
 use OSS\OssClient;
-use Log;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 class AliOssAdapter extends AbstractAdapter
@@ -569,6 +569,24 @@ class AliOssAdapter extends AbstractAdapter
     {
         if (!$this->has($path)) throw new FileNotFoundException($path.' not found');
         return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endPoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
+    }
+
+    /**
+     * Get a temporary URL for the file at the given path.
+     *
+     * @param string $path
+     * @param \DateTimeInterface|int $expiration
+     * @param array $options
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    public function getTemporaryUrl($path, $expiration, array $options = [])
+    {
+        if ($expiration instanceof Carbon) {
+            return $this->client->generatePresignedUrl($this->bucket, $path, $expiration->timestamp);
+        }
+        return $this->client->signUrl($this->bucket, $path, $expiration);
     }
 
     /**
