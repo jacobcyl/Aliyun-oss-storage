@@ -1,5 +1,6 @@
-### 如果本项目对您有帮助且愿意花时间一起维护，欢迎提交PR，我将每个月做一次PR合并。
-### 如果您想和我一起维护，欢迎发邮件给我，我将把您加为项目协作者。
+> 如果本项目对您有帮助且愿意花时间一起维护，欢迎提交PR，我将每个月做一次PR合并。
+
+> 如果您想和我一起维护，欢迎发邮件给我，我将把您加为项目协作者。
 # Aliyun-oss-storage for Laravel 5+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/badges/build.png?b=master)](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/build-status/master)
