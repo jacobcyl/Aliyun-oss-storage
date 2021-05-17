@@ -7,7 +7,7 @@
 
 namespace Jacobcyl\AliOSS;
 
-use Dingo\Api\Contract\Transformer\Adapter;
+use Illuminate\Support\Arr;
 use League\Flysystem\Adapter\AbstractAdapter;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
@@ -15,7 +15,7 @@ use League\Flysystem\Util;
 use OSS\Core\OssException;
 use OSS\OssClient;
 use Log;
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 
 class AliOssAdapter extends AbstractAdapter
 {
@@ -67,7 +67,7 @@ class AliOssAdapter extends AbstractAdapter
     protected $bucket;
 
     protected $endPoint;
-    
+
     protected $cdnDomain;
 
     protected $ssl;
@@ -449,12 +449,16 @@ class AliOssAdapter extends AbstractAdapter
     public function readStream($path)
     {
         $result = $this->readObject($path);
-        $result['stream'] = $result['raw_contents'];
+        if (is_resource($result['raw_contents'])) {
+            $result['stream'] = $result['raw_contents'];
+            $result['raw_contents']->detachStream();
+        } else {
+            $result['stream'] = fopen('php://temp', 'r+');
+            fwrite($result['stream'], $result['raw_contents']);
+        }
         rewind($result['stream']);
         // Ensure the EntityBody object destruction doesn't close the stream
-        $result['raw_contents']->detachStream();
         unset($result['raw_contents']);
-
         return $result;
     }
 
@@ -549,7 +553,7 @@ class AliOssAdapter extends AbstractAdapter
             $this->logErr(__FUNCTION__, $e);
             return false;
         }
-        
+
         if ($acl == OssClient::OSS_ACL_TYPE_PUBLIC_READ ){
             $res['visibility'] = AdapterInterface::VISIBILITY_PUBLIC;
         }else{
@@ -567,9 +571,36 @@ class AliOssAdapter extends AbstractAdapter
      */
     public function getUrl( $path )
     {
-        if (!$this->has($path)) throw new FileNotFoundException($filePath.' not found');
+        if (!$this->has($path)) throw new FileNotFoundException($path.' not found');
         return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endPoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
     }
+
+
+    /**
+     * @param $path
+     * @param $expire
+     * @param $options
+     * @return string
+     * @throws FileNotFoundException
+     * @throws OssException
+     */
+    public function getTemporaryUrl($path, $expire = 600, $options) {
+        if (!$this->has($path))
+            throw new FileNotFoundException($path.' not found');
+        $method = OssClient::OSS_HTTP_GET;
+        if (Arr::has($options, OssClient::OSS_METHOD)) {
+            $method = $options['method'];
+        }
+        return $this->getClient()
+            ->signUrl(
+                $this->getBucket(),
+                $path,
+                $expire,
+                $method,
+                $options
+            );
+    }
+
 
     /**
      * The the ACL visibility.
@@ -608,7 +639,7 @@ class AliOssAdapter extends AbstractAdapter
 
             return $result;
         }
-        
+
         $result = array_merge($result, Util::map($object, static::$resultMap), ['type' => 'file']);
 
         return $result;
@@ -629,7 +660,7 @@ class AliOssAdapter extends AbstractAdapter
             $options = array_merge($options, $this->getOptionsFromConfig($config));
         }
 
-        return array(OssClient::OSS_HEADERS => $options);
+        return $options;
     }
 
     /**

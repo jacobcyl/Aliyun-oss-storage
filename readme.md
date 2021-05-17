@@ -1,23 +1,40 @@
+> 如果本项目对您有帮助且愿意花时间一起维护，欢迎提交PR，我将每个月做一次PR合并。
+
+> 如果您想和我一起维护，欢迎发邮件给我，我将把您加为项目协作者。
 # Aliyun-oss-storage for Laravel 5+
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/badges/build.png?b=master)](https://scrutinizer-ci.com/g/summergeorge/Aliyun-oss-storage/build-status/master)
+[![Latest Stable Version](https://poser.pugx.org/summergeorge/ali-oss-storage/v/stable)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+[![Total Downloads](https://poser.pugx.org/summergeorge/ali-oss-storage/downloads)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+[![Latest Unstable Version](https://poser.pugx.org/summergeorge/ali-oss-storage/v/unstable)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+[![License](https://poser.pugx.org/summergeorge/ali-oss-storage/license)](https://packagist.org/packages/summergeorge/ali-oss-storage)
+
+---
+
 Aliyun oss filesystem storage adapter for laravel 5. You can use Aliyun OSS just like laravel Storage as usual.    
 借鉴了一些优秀的代码，综合各方，同时做了更多优化，将会添加更多完善的接口和插件，打造Laravel最好的OSS Storage扩展
+
+
 ## Inspired By
 - [thephpleague/flysystem-aws-s3-v2](https://github.com/thephpleague/flysystem-aws-s3-v2)
 - [apollopy/flysystem-aliyun-oss](https://github.com/apollopy/flysystem-aliyun-oss) 
+- [jacobcyl/Aliyun-oss-storage](https://github.com/jacobcyl/Aliyun-oss-storage) 
 
 ## Require
 - Laravel 5+
 - cURL extension
 
-##Installation
+之前 fork 的 [jacobcyl/Aliyun-oss-storage](https://github.com/jacobcyl/Aliyun-oss-storage) ，自2.1.1版本开始，增加新功能，更改 composer 包名称为：`summergeorge/ali-oss-storage`
+
+## Installation 
 In order to install AliOSS-storage, just add
 
-    "jacobcyl/ali-oss-storage": "^2.1"
+    "summergeorge/ali-oss-storage": "^2.2"
 
 to your composer.json. Then run `composer install` or `composer update`.  
 Or you can simply run below command to install:
 
-    "composer require jacobcyl/ali-oss-storage:^2.1"
+    "composer require summergeorge/ali-oss-storage:^2.2"
     
 Then in your `config/app.php` add this line to providers array:
 ```php
@@ -34,7 +51,7 @@ Add the following in app/filesystems.php:
             'access_key'    => '<Your Aliyun OSS AccessKeySecret>',
             'bucket'        => '<OSS bucket name>',
             'endpoint'      => '<the endpoint of OSS, E.g: oss-cn-hangzhou.aliyuncs.com | custom domain, E.g:img.abc.com>', // OSS 外网节点或自定义外部域名
-            //'endpoint_internal' => '<internal endpoint [OSS内网节点] 如：oss-cn-shenzhen-internal.aliyuncs.com>', // v2.0.4 新增配置属性，如果为空，则默认使用 endpoint 配置(由于内网上传有点小问题未解决，请大家暂时不要使用内网节点上传，正在与阿里技术沟通中)
+            'endpoint_internal' => '<internal endpoint [OSS内网节点] 如：oss-cn-shenzhen-internal.aliyuncs.com>', // v2.2.1 新增配置属性，如果为空，则默认使用 endpoint 配置。
             'cdnDomain'     => '<CDN domain, cdn域名>', // 如果isCName为true, getUrl会判断cdnDomain是否设定来决定返回的url，如果cdnDomain未设置，则使用endpoint来生成url，否则使用cdn
             'ssl'           => <true|false> // true to use 'https://' and false to use 'http://'. default is false,
             'isCName'       => <true|false> // 是否使用自定义域名,true: 则Storage.url()会使用自定义的cdn或域名生成文件url， false: 则使用外部节点生成url
@@ -96,6 +113,15 @@ Storage::deleteDirectory($directory); // Recursively delete a directory.It will 
 Storage::putRemoteFile('target/path/to/file/jacob.jpg', 'http://example.com/jacob.jpg'); //upload remote file to storage by remote url
 // new function for v2.0.1 version
 Storage::url('path/to/img.jpg') // get the file url
+// new function for v2.1.1 version
+Storage::signUrl('path/to/img.jpg',$timeout) //（请使用新的temporaryUrl方法） get the file url with signature,default timeout = 600
+// new function for v2.1.4 version
+Storage::temporaryUrl('path/to/img.jpg',$timeout) // get the file url with signature,default timeout = 600
+
+// new function for v2.1.2 version
+// 阿里云 oss 帮助文档：https://help.aliyun.com/document_detail/44688.html?spm=a2c4g.11186623.6.1199.40572e934MoHWu
+// getProcessUrl(图片在 oss 中的路径,操作名称（例如：resize）,参数（key => value 形式的数组）);
+Storage::getProcessUrl('path/to/img.jpg','resize', ['m' => 'fixed','h' => '100','w' => '100']) // picture processing，处理图片，支持 oss 图片处理的功能
 ```
 
 ## Documentation
