@@ -428,6 +428,18 @@ class AliOssAdapter extends AbstractAdapter
     public function has($path)
     {
         $object = $this->applyPathPrefix($path);
+        
+        // OSS\Core\OssException
+        try {
+            $this->client->doesObjectExist($this->bucket, $object);
+        } catch (OssException $e) {
+            $this->logErr(__FUNCTION__, $e);
+//            Log::warning('oss文件不存在', [
+//                'message' => $path.' not found',
+//                'path' => __FILE__.__LINE__,
+//            ]);
+            return false;
+        }
 
         return $this->client->doesObjectExist($this->bucket, $object);
     }
