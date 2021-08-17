@@ -14,8 +14,8 @@ use League\Flysystem\Config;
 use League\Flysystem\Util;
 use OSS\Core\OssException;
 use OSS\OssClient;
-use Log;
-use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use Illuminate\Support\Facades\Log;
+use League\Flysystem\FileNotFoundException;
 
 class AliOssAdapter extends AbstractAdapter
 {
@@ -567,7 +567,13 @@ class AliOssAdapter extends AbstractAdapter
      */
     public function getUrl( $path )
     {
-        if (!$this->has($path)) throw new FileNotFoundException($filePath.' not found');
+        if (!$this->has($path)) {
+            Log::warning('oss文件不存在', [
+                'message' => $path.' not found',
+                'path' => __FILE__.__LINE__,
+            ]);
+            // throw new FileNotFoundException($path.' not found'); // 直接抛出异常，真没有办法干活了
+        }
         return ( $this->ssl ? 'https://' : 'http://' ) . ( $this->isCname ? ( $this->cdnDomain == '' ? $this->endPoint : $this->cdnDomain ) : $this->bucket . '.' . $this->endPoint ) . '/' . ltrim($path, '/');
     }
 
